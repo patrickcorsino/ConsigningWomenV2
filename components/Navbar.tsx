@@ -20,30 +20,30 @@ const Navbar: React.FC = () => {
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-24 items-center">
-          {/* Logo - Updated to match branding */}
-          <Link to="/" className="flex flex-col items-center group">
-            <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-serif font-bold text-gray-800 tracking-tight leading-none group-hover:text-black transition-colors">
+        <div className="flex justify-between h-28 items-center">
+          {/* Logo - Consining Women style */}
+          <Link to="/" className="flex flex-col items-center group transition-transform hover:scale-[1.01]">
+            <div className="flex items-baseline">
+              <span className="text-3xl md:text-4xl font-serif font-bold text-gray-800 tracking-tight leading-none">
                 Consigning
               </span>
-              <span className="text-4xl font-script text-fuchsia-brand leading-none">
+              <span className="text-4xl md:text-5xl font-script text-fuchsia-brand leading-none ml-2 transform translate-y-2">
                 Women
               </span>
             </div>
-            <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400 mt-1">
+            <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-gray-400 mt-2 leading-none">
               Upscale Resale Boutique
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-bold tracking-widest hover:text-fuchsia-brand transition-colors ${
-                  isActive(link.path) ? 'text-fuchsia-brand border-b-2 border-fuchsia-brand pb-1' : 'text-gray-600'
+                className={`text-[13px] font-bold tracking-[0.2em] hover:text-fuchsia-brand transition-all relative py-1 ${
+                  isActive(link.path) ? 'text-fuchsia-brand' : 'text-gray-600'
                 }`}
               >
                 {link.name}
@@ -54,13 +54,13 @@ const Navbar: React.FC = () => {
               href={SIMPLECONSIGN_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-fuchsia-brand text-white px-6 py-3 rounded-full text-xs font-bold shadow-lg hover:bg-[#AD1457] transition-all transform hover:scale-105"
+              className="flex items-center gap-2 bg-fuchsia-brand text-white px-8 py-3.5 rounded-full text-xs font-bold shadow-lg hover:bg-[#AD1457] transition-all transform hover:-translate-y-0.5"
             >
               <User size={16} />
-              CONSIGNOR LOGIN
+              MY ACCOUNT
             </a>
 
-            <div className="flex items-center space-x-4 border-l border-gray-200 pl-6 ml-2">
+            <div className="flex items-center space-x-5 border-l border-gray-100 pl-8">
               <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-fuchsia-brand transition-colors">
                 <Instagram size={20} />
               </a>
@@ -71,11 +71,10 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-600 hover:text-fuchsia-brand focus:outline-none p-2"
-              aria-label="Toggle Menu"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -85,14 +84,14 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 py-6 px-6 space-y-6 shadow-2xl absolute w-full top-24 left-0 animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="lg:hidden bg-white border-t border-gray-100 py-8 px-6 space-y-6 shadow-2xl absolute w-full top-[112px] left-0 animate-in fade-in slide-in-from-top-4 duration-300 z-50">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className={`block text-xl font-bold tracking-tight ${
-                isActive(link.path) ? 'text-fuchsia-brand' : 'text-gray-700'
+              className={`block text-2xl font-serif font-bold tracking-tight ${
+                isActive(link.path) ? 'text-fuchsia-brand' : 'text-gray-800'
               }`}
             >
               {link.name}
@@ -102,19 +101,11 @@ const Navbar: React.FC = () => {
             href={SIMPLECONSIGN_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 bg-fuchsia-brand text-white w-full py-5 rounded-2xl text-lg font-bold shadow-md"
+            className="flex items-center justify-center gap-3 bg-fuchsia-brand text-white w-full py-5 rounded-2xl text-lg font-bold shadow-lg"
           >
-            <User size={20} />
-            CONSIGNOR LOGIN
+            <User size={24} />
+            MY ACCOUNT
           </a>
-          <div className="flex justify-center space-x-10 pt-6 border-t border-gray-100">
-            <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer" className="text-gray-500">
-              <Instagram size={28} />
-            </a>
-            <a href={FACEBOOK_LINK} target="_blank" rel="noopener noreferrer" className="text-gray-500">
-              <Facebook size={28} />
-            </a>
-          </div>
         </div>
       )}
     </nav>
