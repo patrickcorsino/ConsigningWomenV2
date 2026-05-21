@@ -1,7 +1,0 @@
-{
-  "name": "Consigning Women Upscale Resale",
-  "description": "A modern, upscale consignment website for stylish women, featuring new arrivals, designer brands, and simple account management.",
-  "requestFramePermissions": [
-    "geolocation"
-  ]
-}
