@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Instagram, Facebook, Send, ShoppingBag } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Phone, Mail, Instagram, Facebook, Send, ShoppingBag, ArrowRight } from 'lucide-react';
 import { LOCATION_INFO, INSTAGRAM_LINK, FACEBOOK_LINK } from '../constants';
 import SEO from '../components/SEO';
 
@@ -42,16 +43,22 @@ const Contact: React.FC = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      <SEO 
-        title="Contact Consigning Women Atlanta | Store Hours & Location Dunwoody"
-        description="Visit our upscale consignment boutique in Dunwoody. Find our store hours, location on Mt Vernon Rd, and contact info for consignment appointments."
-        keywords="contact consigning women, dunwoody consignment location, mt vernon rd consignment shop, consigning women hours"
+      <SEO
+        title="Contact & Visit | Consigning Women Dunwoody, GA"
+        description="Visit our upscale consignment boutique on Mt. Vernon Road in Dunwoody, GA. Store hours, location, phone, email, and how to schedule a consignment appointment."
+        keywords="contact consigning women, dunwoody consignment location, mt vernon rd consignment shop, consigning women hours, consignment appointment dunwoody, designer resale store atlanta"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 mb-6 tracking-tight">Visit Our Dunwoody Boutique</h1>
-          <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium">
-            Located on Mt Vernon Rd., we're your premier destination for designer resale in Atlanta.
+          <span className="inline-block text-[11px] font-bold tracking-[0.3em] text-fuchsia-brand uppercase mb-5">
+            Visit · Call · Email
+          </span>
+          <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 mb-6 tracking-tight">
+            Visit Our Dunwoody Boutique
+          </h1>
+          <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed">
+            Tucked at 2508 Mt. Vernon Road with free parking out front. Come see what's new — or
+            reach out and we'll happily help.
           </p>
         </div>
 
@@ -100,7 +107,15 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 uppercase tracking-widest text-xs mb-2">Consignment</h4>
-                  <p className="text-gray-600 text-lg">By Appointment Only.<br />Please call {LOCATION_INFO.phone}</p>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    Appointment only — call {LOCATION_INFO.phone}.
+                  </p>
+                  <Link
+                    to="/consign"
+                    className="inline-flex items-center gap-2 mt-3 text-sm font-bold text-fuchsia-brand hover:text-[#AD1457] uppercase tracking-widest"
+                  >
+                    See How Consignment Works <ArrowRight size={14} />
+                  </Link>
                 </div>
               </div>
             </div>

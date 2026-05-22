@@ -40,6 +40,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-5 text-[11px] font-bold text-gray-500 tracking-[0.2em] uppercase">
               <li><Link to="/" className="hover:text-fuchsia-brand transition-colors">HOME</Link></li>
               <li><Link to="/new-arrivals" className="hover:text-fuchsia-brand transition-colors">NEW ARRIVALS</Link></li>
+              <li><Link to="/consign" className="hover:text-fuchsia-brand transition-colors">CONSIGN WITH US</Link></li>
               <li><Link to="/about" className="hover:text-fuchsia-brand transition-colors">ABOUT US</Link></li>
               <li><Link to="/contact" className="hover:text-fuchsia-brand transition-colors">CONTACT</Link></li>
               <li><a href={SIMPLECONSIGN_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-fuchsia-brand transition-colors">MY ACCOUNT</a></li>

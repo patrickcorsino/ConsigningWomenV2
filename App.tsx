@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import NewArrivals from './pages/NewArrivals';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Consign from './pages/Consign';
 import NotFound from './pages/NotFound';
 
 // Scroll to top on route change
@@ -31,6 +32,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/new-arrivals" element={<NewArrivals />} />
+              <Route path="/consign" element={<Consign />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />

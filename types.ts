@@ -16,3 +16,8 @@ export interface LocationInfo {
   mapLink: string;
   hours: { [key: string]: string };
 }
+
+export interface FAQItem {
+  q: string;
+  a: string;
+}
