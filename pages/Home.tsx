@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, ShoppingBag, MapPin, CheckCircle2 } from 'lucide-react';
-import { BRANDS, MOCK_REVIEWS, LOCATION_INFO } from '../constants';
+import { BRANDS, REVIEWS, LOCATION_INFO } from '../constants';
 import SEO from '../components/SEO';
 
 const Home: React.FC = () => {
@@ -105,7 +105,7 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {MOCK_REVIEWS.map((review) => (
+            {REVIEWS.map((review) => (
               <div key={review.id} className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20">
                 <p className="text-lg italic mb-6 leading-relaxed">"{review.text}"</p>
                 <div className="flex justify-between items-center">

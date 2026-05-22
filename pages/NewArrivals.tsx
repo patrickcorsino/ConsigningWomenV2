@@ -1,103 +1,101 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Filter, ShoppingBag, ArrowRight } from 'lucide-react';
-import { MOCK_PRODUCTS } from '../constants';
+import { ArrowRight, Instagram, MapPin } from 'lucide-react';
+import { INSTAGRAM_LINK, LOCATION_INFO } from '../constants';
 import SEO from '../components/SEO';
 
-const NewArrivals: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const categories = ['All', 'Clothing', 'Handbags', 'Shoes', 'Accessories'];
+// SETUP: Generate a free LightWidget at https://lightwidget.com/
+// using the @consigningwomen.atlanta handle, then paste the widget ID below.
+// The current placeholder will display a setup screen until replaced.
+const LIGHTWIDGET_ID = 'REPLACE_WITH_YOUR_WIDGET_ID';
 
-  const filteredProducts = activeCategory === 'All' 
-    ? MOCK_PRODUCTS 
-    : MOCK_PRODUCTS.filter(p => p.category === activeCategory);
+const NewArrivals: React.FC = () => {
+  const widgetConfigured = LIGHTWIDGET_ID !== 'REPLACE_WITH_YOUR_WIDGET_ID';
 
   return (
     <div className="bg-white min-h-screen py-16">
-      <SEO 
-        title="New Arrivals | Designer Consignment Atlanta"
-        description="Shop the latest designer arrivals at Consigning Women Atlanta. Fresh inventory of luxury handbags, clothing, and accessories added daily."
-        keywords="new arrivals consignment, designer resale arrivals atlanta, luxury fashion resale atlanta, fresh consignment stock"
+      <SEO
+        title="New Arrivals | Designer Consignment Dunwoody"
+        description="See the latest designer arrivals at Consigning Women in Dunwoody. Fresh inventory of luxury handbags, clothing, and accessories — updated daily on our Instagram."
+        keywords="new arrivals consignment dunwoody, designer resale arrivals atlanta, luxury fashion resale dunwoody, fresh consignment stock atlanta"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-6">New Designer Arrivals</h1>
           <p className="text-xl text-gray-500 max-w-2xl mx-auto">
-            Freshly added pieces from your favorite designer labels at our Dunwoody boutique. Our inventory changes daily, so check back often for the best in upscale resale!
+            Fresh pieces hit our floor every day. Follow along on Instagram for the latest finds — or visit our Dunwoody boutique to see the full selection in person.
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map(category => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-wider transition-all border ${
-                activeCategory === category 
-                  ? 'bg-fuchsia-brand text-white border-fuchsia-brand shadow-lg' 
-                  : 'bg-white text-gray-600 border-gray-200 hover:border-fuchsia-brand hover:text-fuchsia-brand'
-              }`}
-            >
-              {category.toUpperCase()}
-            </button>
-          ))}
-        </div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredProducts.map((product) => (
-            <div key={product.id} className="group relative">
-              <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-gray-100 relative shadow-md">
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-white/90 backdrop-blur px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                    {product.brand}
-                  </span>
-                </div>
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <button className="bg-white text-gray-900 px-6 py-3 rounded-full font-bold shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                    View Details
-                  </button>
-                </div>
-              </div>
-              <div className="mt-6">
-                <div className="flex justify-between items-start mb-1">
-                  <h3 className="text-lg font-serif font-bold text-gray-900">{product.name}</h3>
-                  <div className="text-right">
-                    <p className="text-fuchsia-brand font-bold">${product.price}</p>
-                    {product.originalPrice && (
-                      <p className="text-xs text-gray-400 line-through font-medium">Est. Ret. ${product.originalPrice}</p>
-                    )}
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-gray-400 uppercase tracking-widest font-bold">
-                  <span>Size {product.size}</span>
-                  <span>•</span>
-                  <span>{product.category}</span>
-                </div>
-              </div>
+        {/* Instagram Feed */}
+        <div className="mb-16">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <Instagram size={28} className="text-fuchsia-brand" />
+              <h2 className="text-2xl font-serif font-bold text-gray-900">Latest from @consigningwomen.atlanta</h2>
             </div>
-          ))}
+            <a
+              href={INSTAGRAM_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-2 text-sm font-bold text-fuchsia-brand hover:text-[#AD1457] transition-colors uppercase tracking-widest"
+            >
+              Follow Us <ArrowRight size={16} />
+            </a>
+          </div>
+
+          {widgetConfigured ? (
+            <div className="rounded-3xl overflow-hidden border border-gray-100 bg-gray-50/50">
+              <iframe
+                src={`https://cdn.lightwidget.com/widgets/${LIGHTWIDGET_ID}.html`}
+                scrolling="no"
+                allowTransparency={true}
+                className="lightwidget-widget"
+                style={{ width: '100%', border: 0, overflow: 'hidden', minHeight: '600px' }}
+                title="Instagram feed: latest arrivals at Consigning Women"
+              />
+            </div>
+          ) : (
+            <div className="rounded-3xl border-2 border-dashed border-gray-200 bg-gray-50 p-16 text-center">
+              <Instagram size={48} className="mx-auto text-gray-300 mb-6" />
+              <h3 className="text-xl font-serif font-bold text-gray-900 mb-3">Instagram Feed Setup Needed</h3>
+              <p className="text-gray-500 mb-2 max-w-xl mx-auto">
+                Generate a free widget at <span className="font-mono text-sm">lightwidget.com</span> using the
+                <span className="font-bold"> @consigningwomen.atlanta </span>handle, then paste the widget ID into
+                <span className="font-mono text-sm"> pages/NewArrivals.tsx</span>.
+              </p>
+              <a
+                href={INSTAGRAM_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-6 bg-fuchsia-brand text-white px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-[#AD1457] transition-all"
+              >
+                <Instagram size={18} /> View on Instagram
+              </a>
+            </div>
+          )}
         </div>
 
-        {/* Empty State */}
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-24 bg-gray-50 rounded-3xl">
-            <ShoppingBag size={48} className="mx-auto text-gray-300 mb-4" />
-            <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">No items found</h3>
-            <p className="text-gray-500">We don't have any items in this category right now. Check back soon!</p>
-          </div>
-        )}
+        {/* Visit Store CTA */}
+        <div className="rounded-3xl bg-gray-50 p-10 md:p-16 mb-16 text-center border border-gray-100">
+          <MapPin size={40} className="mx-auto text-fuchsia-brand mb-6" />
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">See It All In Person</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            Our full inventory changes daily. Visit the boutique at {LOCATION_INFO.address}, {LOCATION_INFO.city}, {LOCATION_INFO.state} to shop the latest designer pieces.
+          </p>
+          <a
+            href={LOCATION_INFO.mapLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-gray-900 text-white px-10 py-5 rounded-full text-lg font-bold hover:bg-black transition-all shadow-lg"
+          >
+            GET DIRECTIONS
+          </a>
+        </div>
 
         {/* Call to Action */}
-        <div className="mt-24 p-12 rounded-3xl bg-gray-900 text-white relative overflow-hidden">
+        <div className="p-12 rounded-3xl bg-gray-900 text-white relative overflow-hidden">
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
               <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Have something to consign?</h2>
@@ -105,8 +103,8 @@ const NewArrivals: React.FC = () => {
                 Join our community of stylish consignors. We offer great rates and a hassle-free selling experience for your designer treasures.
               </p>
             </div>
-            <Link 
-              to="/contact" 
+            <Link
+              to="/contact"
               className="bg-fuchsia-brand text-white px-10 py-5 rounded-full text-lg font-bold shadow-lg hover:bg-[#AD1457] transition-all whitespace-nowrap flex items-center gap-2 group"
             >
               CONSIGN WITH US

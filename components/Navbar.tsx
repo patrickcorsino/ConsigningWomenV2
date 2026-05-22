@@ -23,11 +23,10 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-28 items-center">
           {/* Official Logo */}
           <Link to="/" className="flex flex-col items-center group transition-transform hover:scale-[1.01]">
-            <img 
-              src={LOGO_PATH} 
-              alt="Consigning Women Logo" 
+            <img
+              src={LOGO_PATH}
+              alt="Consigning Women Logo"
               className="h-20 w-auto object-contain"
-              style={{ mixBlendMode: 'multiply' }}
             />
           </Link>
 

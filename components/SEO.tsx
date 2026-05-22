@@ -12,12 +12,12 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({
-  title = "Consigning Women | Upscale Resale Boutique Atlanta",
-  description = "Shop the best in upscale resale at Consigning Women Atlanta. Designer labels, current trends, and classic styles. Best consignment shop in Atlanta, Buckhead, and Brookhaven.",
+  title = "Consigning Women | Upscale Resale Boutique Dunwoody GA",
+  description = "Atlanta's first choice for clothing consignment. Shop designer labels, current trends, and classic styles at Consigning Women in Dunwoody, GA — serving Sandy Springs, Buckhead, Brookhaven, and metro Atlanta.",
   canonical = "https://consigningwomenatlanta.com",
   ogType = "website",
-  ogImage = "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200&auto=format&fit=crop",
-  keywords = "consigning women atlanta, consigning atlanta, designer resale atlanta, upscale consignment atlanta, luxury resale atlanta, buckhead consignment, brookhaven consignment, women's fashion resale atlanta"
+  ogImage = "https://consigningwomenatlanta.com/logo.jpg",
+  keywords = "consigning women dunwoody, consigning women atlanta, designer resale atlanta, upscale consignment dunwoody, luxury resale dunwoody, sandy springs consignment, buckhead consignment, brookhaven consignment"
 }) => {
   const siteTitle = title.includes("Consigning Women") ? title : `${title} | Consigning Women`;
 
@@ -45,9 +45,9 @@ const SEO: React.FC<SEOProps> = ({
 
       {/* Geo tags for Local SEO */}
       <meta name="geo.region" content="US-GA" />
-      <meta name="geo.placename" content="Atlanta" />
-      <meta name="geo.position" content="33.8;-84.3" />
-      <meta name="ICBM" content="33.8, -84.3" />
+      <meta name="geo.placename" content="Dunwoody" />
+      <meta name="geo.position" content="33.9452;-84.3371" />
+      <meta name="ICBM" content="33.9452, -84.3371" />
     </Helmet>
   );
 };

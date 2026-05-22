@@ -1,15 +1,3 @@
-
-export interface Product {
-  id: string;
-  name: string;
-  brand: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  category: string;
-  size: string;
-}
-
 export interface Review {
   id: string;
   author: string;

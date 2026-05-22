@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(/Users/patrickcorsino1/Desktop/ConsigningWomen/**)",
+      "Read(/Users/patrickcorsino1/Desktop/chiefdesk/**)",
+      "Read(/Users/patrickcorsino1/Desktop/recoverflow/**)",
+      "Read(/Users/patrickcorsino1/Desktop/cryptoinfodaily*/**)",
+      "Read(/Users/patrickcorsino1/Desktop/cryptoinfodaily*)",
+      "Edit(/Users/patrickcorsino1/Desktop/ConsigningWomen/**)",
+      "Edit(/Users/patrickcorsino1/Desktop/chiefdesk/**)",
+      "Edit(/Users/patrickcorsino1/Desktop/recoverflow/**)",
+      "Edit(/Users/patrickcorsino1/Desktop/cryptoinfodaily*/**)",
+      "Write(/Users/patrickcorsino1/Desktop/ConsigningWomen/**)",
+      "Write(/Users/patrickcorsino1/Desktop/chiefdesk/**)",
+      "Write(/Users/patrickcorsino1/Desktop/recoverflow/**)",
+      "Write(/Users/patrickcorsino1/Desktop/cryptoinfodaily*/**)",
+      "Bash(cd /Users/patrickcorsino1/Desktop/ConsigningWomen*)",
+      "Bash(cd /Users/patrickcorsino1/Desktop/chiefdesk*)",
+      "Bash(cd /Users/patrickcorsino1/Desktop/recoverflow*)",
+      "Bash(cd /Users/patrickcorsino1/Desktop/cryptoinfodaily*)",
+      "Bash(rm:*/Desktop/ConsigningWomen*)",
+      "Bash(rm:*/Desktop/chiefdesk*)",
+      "Bash(rm:*/Desktop/recoverflow*)",
+      "Bash(rm:*/Desktop/cryptoinfodaily*)",
+      "Bash(git:*/Desktop/ConsigningWomen *)",
+      "Bash(git:*/Desktop/chiefdesk *)",
+      "Bash(git:*/Desktop/recoverflow *)",
+      "Bash(git:*/Desktop/cryptoinfodaily *)",
+      "Bash(gh repo clone patrickcorsino/ConsigningWomen *)",
+      "Bash(gh repo clone patrickcorsino/chiefdesk *)",
+      "Bash(gh repo clone patrickcorsino/recoverflow *)",
+      "Bash(gh repo clone patrickcorsino/cryptoinfodaily *)",
+      "Bash(gh repo delete *)",
+      "Bash(gh repo edit patrickcorsino/ConsigningWomen *)",
+      "Bash(gh repo edit patrickcorsino/chiefdesk *)",
+      "Bash(gh repo edit patrickcorsino/recoverflow *)",
+      "Bash(gh repo edit patrickcorsino/cryptoinfodaily *)"
+    ],
+    "ask": [
+      "Bash(cd *)",
+      "Read(/Users/patrickcorsino1/Desktop/**)",
+      "Write(/Users/patrickcorsino1/Desktop/**)",
+      "Edit(/Users/patrickcorsino1/Desktop/**)"
+    ]
+  }
+}

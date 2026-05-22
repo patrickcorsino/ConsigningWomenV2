@@ -1,13 +1,43 @@
 
-import React from 'react';
-import { MapPin, Phone, Mail, Instagram, Facebook, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Phone, Mail, Instagram, Facebook, Send, ShoppingBag } from 'lucide-react';
 import { LOCATION_INFO, INSTAGRAM_LINK, FACEBOOK_LINK } from '../constants';
 import SEO from '../components/SEO';
 
+type FormStatus = 'idle' | 'sending' | 'success' | 'error';
+
 const Contact: React.FC = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert('Thank you for your message! We will get back to you shortly.');
+    setStatus('sending');
+    setErrorMessage('');
+
+    const formData = new FormData(e.currentTarget);
+    formData.append('access_key', import.meta.env.VITE_WEB3FORMS_KEY ?? '');
+    formData.append('from_name', 'Consigning Women Website');
+    formData.append('subject', `Website Contact: ${formData.get('subject') ?? 'General Inquiry'}`);
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus('success');
+        e.currentTarget.reset();
+      } else {
+        setStatus('error');
+        setErrorMessage(data.message || 'Something went wrong. Please call us instead.');
+      }
+    } catch {
+      setStatus('error');
+      setErrorMessage('Could not reach the server. Please call us instead.');
+    }
   };
 
   return (
@@ -60,7 +90,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 uppercase tracking-widest text-xs mb-2">Email</h4>
-                  <p className="text-gray-600 text-lg">consigningwomenatlanta@gmail.com</p>
+                  <a href={`mailto:${LOCATION_INFO.email}`} className="text-gray-600 text-lg hover:text-fuchsia-brand transition-colors break-all">{LOCATION_INFO.email}</a>
                 </div>
               </div>
 
@@ -70,7 +100,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 uppercase tracking-widest text-xs mb-2">Consignment</h4>
-                  <p className="text-gray-600 text-lg">By Appointment Only.<br />Please call 770-394-1600</p>
+                  <p className="text-gray-600 text-lg">By Appointment Only.<br />Please call {LOCATION_INFO.phone}</p>
                 </div>
               </div>
             </div>
@@ -97,20 +127,22 @@ const Contact: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    required 
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
                     placeholder="Jane Doe"
                     className="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-brand/20 focus:border-fuchsia-brand transition-all bg-gray-50/50"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="email" className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    required 
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
                     placeholder="jane@example.com"
                     className="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-brand/20 focus:border-fuchsia-brand transition-all bg-gray-50/50"
                   />
@@ -118,8 +150,9 @@ const Contact: React.FC = () => {
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="subject" className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Subject</label>
-                <select 
+                <select
                   id="subject"
+                  name="subject"
                   className="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-brand/20 focus:border-fuchsia-brand transition-all bg-gray-50/50 appearance-none"
                 >
                   <option>General Inquiry</option>
@@ -130,21 +163,33 @@ const Contact: React.FC = () => {
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="message" className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Message</label>
-                <textarea 
-                  id="message" 
-                  rows={6} 
-                  required 
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={6}
+                  required
                   placeholder="How can we help you today?"
                   className="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-brand/20 focus:border-fuchsia-brand transition-all bg-gray-50/50 resize-none"
                 ></textarea>
               </div>
-              <button 
-                type="submit" 
-                className="w-full bg-fuchsia-brand text-white py-5 rounded-2xl font-bold text-lg shadow-xl hover:bg-[#AD1457] transition-all transform active:scale-95 flex items-center justify-center gap-3"
+              <button
+                type="submit"
+                disabled={status === 'sending' || status === 'success'}
+                className="w-full bg-fuchsia-brand text-white py-5 rounded-2xl font-bold text-lg shadow-xl hover:bg-[#AD1457] transition-all transform active:scale-95 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                SEND MESSAGE
-                <Send size={20} />
+                {status === 'sending' ? 'SENDING…' : status === 'success' ? 'MESSAGE SENT ✓' : 'SEND MESSAGE'}
+                {status !== 'success' && <Send size={20} />}
               </button>
+              {status === 'success' && (
+                <p className="text-center text-sm text-green-700 bg-green-50 border border-green-100 rounded-xl py-3 px-4">
+                  Thanks for reaching out — we'll get back to you shortly.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-center text-sm text-red-700 bg-red-50 border border-red-100 rounded-xl py-3 px-4">
+                  {errorMessage}
+                </p>
+              )}
             </form>
             
             {/* Store Hours Recap */}

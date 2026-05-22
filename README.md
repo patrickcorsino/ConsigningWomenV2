@@ -1,20 +1,44 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Consigning Women — Upscale Resale
 
-# Run and deploy your AI Studio app
+Marketing site for [Consigning Women](https://consigningwomenatlanta.com), an upscale women's consignment boutique at 2508 Mt. Vernon Rd., Dunwoody, GA.
 
-This contains everything you need to run your app locally.
+## Stack
 
-View your app in AI Studio: https://ai.studio/apps/7bcfd2a1-71cb-4421-bc7a-8f26d58d9f0c
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- React Router v6 (BrowserRouter)
+- Deployed on Vercel
 
-## Run Locally
+## Local development
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+npm run dev
+```
 
+The dev server runs on http://localhost:3000.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Environment variables
+
+Create a `.env.local` file in the project root:
+
+```
+VITE_WEB3FORMS_KEY=your-web3forms-access-key
+```
+
+Get a free Web3Forms access key at [web3forms.com](https://web3forms.com) — it's used by the contact form to deliver messages to `consigningwomenatlanta@gmail.com`.
+
+For Vercel deployments, add the same variable in your Vercel project's Environment Variables settings.
+
+## Setup TODOs before launch
+
+- **Instagram feed** — generate a free widget at [lightwidget.com](https://lightwidget.com) for `@consigningwomen.atlanta` and paste the widget ID into `pages/NewArrivals.tsx` (replace `REPLACE_WITH_YOUR_WIDGET_ID`).
+- **Web3Forms key** — sign up, then add `VITE_WEB3FORMS_KEY` in Vercel.
+
+## Scripts
+
+- `npm run dev` — local dev server
+- `npm run build` — production build into `dist/`
+- `npm run preview` — preview production build locally
+- `npm run lint` — type-check with `tsc --noEmit`

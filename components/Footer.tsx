@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Facebook, Heart } from 'lucide-react';
-import { LOCATION_INFO, INSTAGRAM_LINK, FACEBOOK_LINK, LOGO_PATH } from '../constants';
+import { LOCATION_INFO, INSTAGRAM_LINK, FACEBOOK_LINK, LOGO_PATH, SIMPLECONSIGN_LINK } from '../constants';
 
 const Footer: React.FC = () => {
   return (
@@ -12,11 +12,10 @@ const Footer: React.FC = () => {
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="flex flex-col items-start mb-10 group">
-              <img 
-                src={LOGO_PATH} 
-                alt="Consigning Women Logo" 
+              <img
+                src={LOGO_PATH}
+                alt="Consigning Women Logo"
                 className="h-16 w-auto object-contain mb-2"
-                style={{ mixBlendMode: 'multiply' }}
               />
               <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">
                 Upscale Resale
@@ -43,7 +42,7 @@ const Footer: React.FC = () => {
               <li><Link to="/new-arrivals" className="hover:text-fuchsia-brand transition-colors">NEW ARRIVALS</Link></li>
               <li><Link to="/about" className="hover:text-fuchsia-brand transition-colors">ABOUT US</Link></li>
               <li><Link to="/contact" className="hover:text-fuchsia-brand transition-colors">CONTACT</Link></li>
-              <li><a href="https://www.simpleconsign.com/customer/login.php?id=consigningwomen" className="hover:text-fuchsia-brand transition-colors">MY ACCOUNT</a></li>
+              <li><a href={SIMPLECONSIGN_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-fuchsia-brand transition-colors">MY ACCOUNT</a></li>
             </ul>
           </div>
 
@@ -61,7 +60,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-4">
                 <Mail size={24} className="text-fuchsia-brand shrink-0" />
-                <span className="break-all">consigningwomenatlanta@gmail.com</span>
+                <a href={`mailto:${LOCATION_INFO.email}`} className="break-all hover:text-fuchsia-brand transition-colors">{LOCATION_INFO.email}</a>
               </li>
             </ul>
           </div>
