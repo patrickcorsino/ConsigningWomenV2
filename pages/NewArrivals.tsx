@@ -96,6 +96,7 @@ const NewArrivals: React.FC = () => {
               <blockquote
                 key={shortcode}
                 className="instagram-media"
+                data-instgrm-captioned
                 data-instgrm-permalink={`https://www.instagram.com/p/${shortcode}/`}
                 data-instgrm-version="14"
                 style={{
