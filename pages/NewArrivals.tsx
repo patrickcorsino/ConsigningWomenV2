@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Instagram, MapPin } from 'lucide-react';
 import { INSTAGRAM_LINK, LOCATION_INFO } from '../constants';
 import SEO from '../components/SEO';
 
-// SETUP: Generate a free LightWidget at https://lightwidget.com/
-// using the @consigningwomen.atlanta handle, then paste the widget ID below.
-// The current placeholder will display a setup screen until replaced.
-const LIGHTWIDGET_ID = 'REPLACE_WITH_YOUR_WIDGET_ID';
+// LightWidget for @consigningwomen.atlanta. Manage at https://lightwidget.com.
+const LIGHTWIDGET_ID = '9efd4f16aa625489829b881bac3fb380';
 
 const NewArrivals: React.FC = () => {
   const widgetConfigured = LIGHTWIDGET_ID !== 'REPLACE_WITH_YOUR_WIDGET_ID';
+
+  // Load LightWidget's auto-resize script so the iframe fits its content
+  // exactly instead of falling back to a fixed minHeight (cuts off or leaves gaps).
+  useEffect(() => {
+    if (!widgetConfigured) return;
+    const script = document.createElement('script');
+    script.src = 'https://cdn.lightwidget.com/widgets/lightwidget.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [widgetConfigured]);
 
   return (
     <div className="bg-white min-h-screen py-16">
