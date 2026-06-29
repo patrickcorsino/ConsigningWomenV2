@@ -4,54 +4,82 @@ import { ArrowRight, Instagram, MapPin } from 'lucide-react';
 import { INSTAGRAM_LINK, LOCATION_INFO } from '../constants';
 import SEO from '../components/SEO';
 
-// LightWidget for @consigningwomen.atlanta. Manage at https://lightwidget.com.
-const LIGHTWIDGET_ID = '9efd4f16aa625489829b881bac3fb380';
+// Featured posts from @consigningwomen.atlanta, ordered newest → oldest.
+// To refresh: replace any shortcode with a newer one from instagram.com/p/<shortcode>.
+const FEATURED_POSTS = [
+  'DaLv8kBoOW4',
+  'DaEBE8PKwD_',
+  'DaEAfoaIf0B',
+  'DaEACaeGRN2',
+  'DaBdhVjIB5l',
+  'DZ582_Voyvz',
+  'DZ5sUFKoOxv',
+  'DZ5rqz3Irqk',
+  'DZ5Qr7OIva3',
+];
+
+declare global {
+  interface Window {
+    instgrm?: { Embeds: { process: () => void } };
+  }
+}
 
 const NewArrivals: React.FC = () => {
-  const widgetConfigured = LIGHTWIDGET_ID !== 'REPLACE_WITH_YOUR_WIDGET_ID';
-
-  // Load LightWidget's auto-resize script so the iframe fits its content
-  // exactly instead of falling back to a fixed minHeight (cuts off or leaves gaps).
+  // Load Instagram's embed script once; (re)process the blockquotes so they
+  // transform into rendered post cards. Idempotent across re-mounts.
   useEffect(() => {
-    if (!widgetConfigured) return;
+    const SRC = 'https://www.instagram.com/embed.js';
+    const existing = document.querySelector<HTMLScriptElement>(`script[src="${SRC}"]`);
+    if (existing) {
+      window.instgrm?.Embeds.process();
+      return;
+    }
     const script = document.createElement('script');
-    script.src = 'https://cdn.lightwidget.com/widgets/lightwidget.js';
+    script.src = SRC;
     script.async = true;
+    script.onload = () => window.instgrm?.Embeds.process();
     document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, [widgetConfigured]);
+  }, []);
 
   return (
     <div className="bg-white min-h-screen py-16">
       <SEO
         title="New Designer Arrivals | Chanel, Hermès & Gucci Resale Dunwoody"
-        description="See the latest designer arrivals at Consigning Women Dunwoody — authentic Chanel, Hermès, Gucci, Louis Vuitton, Burberry and more, posted daily on Instagram. Fresh inventory, real prices."
+        description="See the latest designer arrivals at Consigning Women Dunwoody — authentic Chanel, Hermès, Gucci, Louis Vuitton, Burberry and more, posted to Instagram from our Dunwoody floor."
         keywords="new arrivals consignment dunwoody, designer handbags dunwoody, chanel resale atlanta, hermes consignment dunwoody, gucci resale atlanta, luxury fashion dunwoody ga"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block text-[11px] font-bold tracking-[0.3em] text-fuchsia-brand uppercase mb-5">
-            Updated Daily
+            Fresh from the floor
           </span>
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-6">
             New Designer Arrivals
           </h1>
           <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            Fresh Chanel, Hermès, Gucci, Louis Vuitton, Burberry and more — posted to Instagram
-            the moment they hit our Dunwoody floor. Follow along, then stop in to shop the full
-            collection in person.
+            Authentic Chanel, Hermès, Gucci, Louis Vuitton, Burberry and more — straight from our
+            Dunwoody boutique. Follow{' '}
+            <a
+              href={INSTAGRAM_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-fuchsia-brand font-bold hover:underline"
+            >
+              @consigningwomen.atlanta
+            </a>{' '}
+            to see every new piece the moment it lands.
           </p>
         </div>
 
-        {/* Instagram Feed */}
-        <div className="mb-16">
+        {/* Instagram grid */}
+        <div className="mb-20">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
               <Instagram size={28} className="text-fuchsia-brand" />
-              <h2 className="text-2xl font-serif font-bold text-gray-900">Latest from @consigningwomen.atlanta</h2>
+              <h2 className="text-2xl font-serif font-bold text-gray-900">
+                Featured Pieces from Instagram
+              </h2>
             </div>
             <a
               href={INSTAGRAM_LINK}
@@ -59,40 +87,53 @@ const NewArrivals: React.FC = () => {
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-bold text-fuchsia-brand hover:text-[#AD1457] transition-colors uppercase tracking-widest"
             >
-              Follow Us <ArrowRight size={16} />
+              See All on Instagram <ArrowRight size={16} />
             </a>
           </div>
 
-          {widgetConfigured ? (
-            <div className="rounded-3xl overflow-hidden border border-gray-100 bg-gray-50/50">
-              <iframe
-                src={`https://cdn.lightwidget.com/widgets/${LIGHTWIDGET_ID}.html`}
-                scrolling="no"
-                allowTransparency={true}
-                className="lightwidget-widget"
-                style={{ width: '100%', border: 0, overflow: 'hidden', minHeight: '600px' }}
-                title="Instagram feed: latest arrivals at Consigning Women"
-              />
-            </div>
-          ) : (
-            <div className="rounded-3xl border-2 border-dashed border-gray-200 bg-gray-50 p-16 text-center">
-              <Instagram size={48} className="mx-auto text-gray-300 mb-6" />
-              <h3 className="text-xl font-serif font-bold text-gray-900 mb-3">Instagram Feed Setup Needed</h3>
-              <p className="text-gray-500 mb-2 max-w-xl mx-auto">
-                Generate a free widget at <span className="font-mono text-sm">lightwidget.com</span> using the
-                <span className="font-bold"> @consigningwomen.atlanta </span>handle, then paste the widget ID into
-                <span className="font-mono text-sm"> pages/NewArrivals.tsx</span>.
-              </p>
-              <a
-                href={INSTAGRAM_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-6 bg-fuchsia-brand text-white px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-[#AD1457] transition-all"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+            {FEATURED_POSTS.map((shortcode) => (
+              <blockquote
+                key={shortcode}
+                className="instagram-media"
+                data-instgrm-permalink={`https://www.instagram.com/p/${shortcode}/`}
+                data-instgrm-version="14"
+                style={{
+                  background: '#FFF',
+                  border: 0,
+                  borderRadius: '12px',
+                  boxShadow:
+                    '0 0 1px 0 rgba(0,0,0,0.08), 0 4px 16px 0 rgba(0,0,0,0.08)',
+                  margin: 0,
+                  maxWidth: '540px',
+                  minWidth: 'unset',
+                  padding: 0,
+                  width: '100%',
+                }}
               >
-                <Instagram size={18} /> View on Instagram
-              </a>
-            </div>
-          )}
+                <a
+                  href={`https://www.instagram.com/p/${shortcode}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ padding: '16px', display: 'block', textAlign: 'center' }}
+                >
+                  View this post on Instagram
+                </a>
+              </blockquote>
+            ))}
+          </div>
+
+          {/* Mobile-friendly "see all" link under the grid */}
+          <div className="sm:hidden text-center mt-10">
+            <a
+              href={INSTAGRAM_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-bold text-fuchsia-brand uppercase tracking-widest"
+            >
+              See All on Instagram <ArrowRight size={16} />
+            </a>
+          </div>
         </div>
 
         {/* Visit Store CTA */}
@@ -116,7 +157,7 @@ const NewArrivals: React.FC = () => {
           </a>
         </div>
 
-        {/* Call to Action */}
+        {/* Consign CTA */}
         <div className="p-12 rounded-3xl bg-gray-900 text-white relative overflow-hidden">
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
