@@ -7,15 +7,15 @@ import SEO from '../components/SEO';
 // Featured posts from @consigningwomen.atlanta, ordered newest → oldest.
 // To refresh: replace any shortcode with a newer one from instagram.com/p/<shortcode>.
 const FEATURED_POSTS = [
+  'DaYSs_CR6bk',
+  'DaQVILGRGNE',
+  'DaOS-IPINBn',
   'DaLv8kBoOW4',
   'DaEBE8PKwD_',
   'DaEAfoaIf0B',
   'DaEACaeGRN2',
   'DaBdhVjIB5l',
   'DZ582_Voyvz',
-  'DZ5sUFKoOxv',
-  'DZ5rqz3Irqk',
-  'DZ5Qr7OIva3',
 ];
 
 declare global {
