@@ -4,18 +4,18 @@ import { ArrowRight, Instagram, MapPin } from 'lucide-react';
 import { INSTAGRAM_LINK, LOCATION_INFO } from '../constants';
 import SEO from '../components/SEO';
 
-// Featured posts from @consigningwomen.atlanta, ordered newest → oldest.
-// To refresh: replace any shortcode with a newer one from instagram.com/p/<shortcode>.
+// Hand-picked posts from @consigningwomen.atlanta, in display order.
+// To refresh: swap any shortcode — the part after instagram.com/p/ in a post URL.
 const FEATURED_POSTS = [
-  'DaYSs_CR6bk',
-  'DaQVILGRGNE',
-  'DaOS-IPINBn',
-  'DaLv8kBoOW4',
-  'DaEBE8PKwD_',
-  'DaEAfoaIf0B',
-  'DaEACaeGRN2',
-  'DaBdhVjIB5l',
-  'DZ582_Voyvz',
+  'DdRtyUTIPyL',
+  'Dem0MUdoI3B',
+  'DdCj9JeoPJF',
+  'Demw09voweD',
+  'DemwTcTIBK9',
+  'DemvgzWoAQd',
+  'Demuasgofa0',
+  'Deh38R_IBeq',
+  'Dd7O4SUoNf0',
 ];
 
 declare global {
